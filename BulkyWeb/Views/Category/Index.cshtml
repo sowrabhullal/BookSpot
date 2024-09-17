@@ -1,21 +1,42 @@
 ﻿@model List<Category>
-<h1>Category Page</h1>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Category Name</th>
-            <th>Display Order</th>
-        </tr>
-    </thead>
-
-    <tbody> 
-        @foreach (var i in Model.OrderBy(u=>u.DisplayOrder))
-        {
+<!--Can be move to partial view because it could be used by other pages as well-->
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">Category</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle-fill">
+                    Create new category
+                </i>
+            </a>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
             <tr>
-                <td>@i.Name</td>
-                <td>@i.DisplayOrder</td>
+                <th>Category Name</th>
+                <th>Display Order</th>
+                <th>Operations</th>
             </tr>
-        }
-    </tbody>
-    
-</table>
+        </thead>
+
+        <tbody>
+            @foreach (var i in Model.OrderBy(u => u.DisplayOrder))
+            {
+                <tr>
+                    <td>@i.Name</td>
+                    <td>@i.DisplayOrder</td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <!--asp-route-id means it will pass id to edit action-->
+                            <a asp-controller="Category" asp-action="Edit" asp-route-id="@i.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
+                            <a asp-controller="Category" asp-action="Delete" asp-route-id="@i.Id" class="btn btn-danger mx-2"><i class="bi bi-trash"></i>Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
