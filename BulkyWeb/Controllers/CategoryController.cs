@@ -1,19 +1,20 @@
 ﻿using Bulky.DataAccess.Data;
 using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
+using Bulky.DataAccess.Repository.IRepository;
 
 namespace BulkyWeb.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db)
+        private readonly ICategoryRepository repository;
+        public CategoryController(ICategoryRepository rp)
         {
-            this._db = db;
+            repository = rp;
         }
         public IActionResult Index()
         {
-            var category = _db.Categories.ToList();
+            var category = repository.GetAll();
             return View(category);
         }
 
@@ -32,8 +33,8 @@ namespace BulkyWeb.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+                repository.Add(obj);
+                repository.Save();
                 TempData["sucess"] = "Category created sucesfuly";
                 return RedirectToAction("Index");
             }
@@ -49,7 +50,7 @@ namespace BulkyWeb.Controllers
                 return NotFound();
             }
 
-            Category categoryfromdb = _db.Categories.Find(id);
+            Category categoryfromdb = repository.Get(u => u.Id == id);
 
             if (categoryfromdb == null) {
                 return NotFound();
@@ -63,8 +64,8 @@ namespace BulkyWeb.Controllers
         [HttpPost]
         public IActionResult Edit(Category obj)
         {
-            _db.Categories.Update(obj);
-            _db.SaveChanges();
+            repository.Update(obj);
+            repository.Save();
             TempData["sucess"] = "Category updated sucesfuly";
             return RedirectToAction("Index");
 
@@ -73,8 +74,8 @@ namespace BulkyWeb.Controllers
         //we can give diff name for method but still have same action name- use below attribute
         [ActionName("Delete")]
         public IActionResult DeletePost(int id) {
-            _db.Categories.Remove(_db.Categories.Find(id));
-            _db.SaveChanges();
+            repository.Remove(repository.Get(u=>u.Id==id));
+            repository.Save();
             TempData["sucess"] = "Category deleted sucesfuly";
             return RedirectToAction("Index");
         }

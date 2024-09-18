@@ -1,10 +1,17 @@
 using Bulky.DataAccess.Data;
+using Bulky.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
+using Bulky.DataAccess.Repository.IRepository;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Registerign IcategoryRepository
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
