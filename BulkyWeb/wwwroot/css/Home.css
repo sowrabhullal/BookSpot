@@ -1,0 +1,25 @@
+﻿.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    background-color: rgba(var(--bs-primary-rgb);
+    color: white !important;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px; /* Increased padding for better spacing */
+    box-sizing: border-box;
+    background-color: #f8f9fa;
+}
+
+    .image-container img {
+        object-fit: contain;
+        width: 100%;
+        height: auto;
+    }
+

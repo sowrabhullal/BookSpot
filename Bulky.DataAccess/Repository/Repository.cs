@@ -17,22 +17,42 @@ namespace Bulky.DataAccess.Repository
         public Repository(ApplicationDbContext db) {
             _db = db;
             _dbSet = db.Set<T>();
+            _db.Products.Include(u => u.Category).Include(u => u.CategoryId);
         }
         public void Add(T entity)
         {
             _dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public T Get(Expression<Func<T, bool>> filter, string? includeproperties = null)
         {
             IQueryable<T> query = _dbSet;
+            if (includeproperties != null)
+            {
+                foreach (var property in includeproperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(property);
+                }
+            }
             query = query.Where(filter);
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll()
+        //must handle multiple includes
+        //includeproperties is to handle foreign key relationship, ie to get the values of
+        //category table as part of the product table
+        public IEnumerable<T> GetAll(string? includeproperties=null)
         {
             IQueryable<T> query = _dbSet;
+            if (includeproperties != null) {
+                foreach (var property in includeproperties
+                    .Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries))
+                { 
+                    query=query.Include(property);
+                }
+            }
+            
             return query.ToList();
         }
 
