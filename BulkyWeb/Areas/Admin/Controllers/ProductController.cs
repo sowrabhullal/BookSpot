@@ -1,7 +1,9 @@
 ﻿using Bulky.DataAccess.Repository;
 using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models;
+using Bulky.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BulkyWeb.Areas.Admin.Controllers
 {
@@ -17,27 +19,58 @@ namespace BulkyWeb.Areas.Admin.Controllers
         {
             //unitofwork has category object 
             var product = unitofwork.product.GetAll();
+            IEnumerable<SelectListItem> CategoryList = unitofwork.category.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value=u.Id.ToString()
+            });
+
             return View(product);
         }
 
         public IActionResult Create()
         {
-            return View();
+            //not used anymore
+            /*IEnumerable<SelectListItem> CategoryList = unitofwork.category.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            });*/
+
+            ProductVM productvm = new()
+            {
+                CategoryList = unitofwork.category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }),
+                Product = new Product()
+            };
+
+            return View(productvm);
         }
 
         [HttpPost]
-        public IActionResult Create(Product obj)
+        public IActionResult Create(ProductVM obj)
         {
             //Server side validations
             if (ModelState.IsValid)
             {
-                unitofwork.product.Add(obj);
+                unitofwork.product.Add(obj.Product);
                 unitofwork.Save();
                 TempData["sucess"] = "Product created sucesfuly";
                 return RedirectToAction("Index");
             }
             else
             {
+                //populate drop down again for redirecting
+                obj.CategoryList = unitofwork.category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
+                   
+
                 return View(obj);
             }
         }
@@ -62,9 +95,9 @@ namespace BulkyWeb.Areas.Admin.Controllers
         //Submit button
 
         [HttpPost]
-        public IActionResult Edit(Product obj)
+        public IActionResult Edit(ProductVM obj)
         {
-            unitofwork.product.Update(obj);
+            unitofwork.product.Update(obj.Product);
             unitofwork.Save();
             TempData["sucess"] = "Product updated sucesfuly";
             return RedirectToAction("Index");

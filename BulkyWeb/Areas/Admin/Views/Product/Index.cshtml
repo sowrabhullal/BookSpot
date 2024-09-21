@@ -1,54 +1,58 @@
 ﻿@model List<Product>
 
-<div class="row justify-content-between align-items-center">
-    <div class="col-auto">
-        <h2 class="text-primary">Products</h2>
-    </div>
-    <div class="col-auto">
-        <a asp-controller="Product" asp-action="Create" class="btn btn-primary">
-            <i class="bi bi-plus-circle-fill me-1"></i> Create New Product
-        </a>
-    </div>
-</div>
+<!-- Container for the Product List -->
 <div class="container mt-4">
-    <div class="row">
-        @foreach (var product in Model)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <!-- Product Title -->
-                        <h5 class="card-title text-primary">@product.Title</h5>
-                        <!-- Product Author -->
-                        <h6 class="card-subtitle mb-2 text-muted">Author: @product.Author</h6>
-                        <!-- Product Description -->
-                        <p class="card-text">@product.Description</p>
-                        <!-- Product ISBN -->
-                        <p class="card-text"><strong>ISBN:</strong> @product.ISBN</p>
-                        <!-- Product Pricing -->
-                        <p class="card-text">
-                            <strong>List Price:</strong> $@product.ListPrice <br />
-                            <strong>Price:</strong> $@product.Price <br />
-                            <!-- <strong>Price (50+):</strong> $@product.Price50 <br />
-                            <strong>Price (100+):</strong> $@product.Price100 -->
-                        </p>
-                    </div>
-                    <!-- Card Footer with Operations -->
-                    <div class="card-footer d-flex justify-content-between">
-                        <!-- Edit Button -->
-                        <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-primary">
-                            <i class="bi bi-pencil-square"></i> Edit
-                        </a>
-                        <!-- Delete Button -->
-                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id"
-                           class="btn btn-danger"
-                           onclick="return confirm('Are you sure you want to delete this product?');">
-                            <i class="bi bi-trash"></i> Delete
-                        </a>
-                    </div>
-                </div>
-            </div>
-        }
+    <!-- Row for Title and Create Button -->
+    <div class="row justify-content-between align-items-center">
+        <div class="col-auto">
+            <h2 class="text-primary">Product List</h2>
+        </div>
+        <div class="col-auto">
+            <a asp-controller="Product" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle-fill me-1"></i> Create New Product
+            </a>
+        </div>
+    </div>
+
+    <!-- Product Table -->
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>ISBN</th>
+                    <th>Price</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model)
+                {
+                    <tr>
+                        <td>@i.Title</td>
+                        <td>@i.ISBN</td>
+                        <td>@i.Price</td>
+                        <td>@i.Author</td>
+                        <td></td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <!-- Edit Button -->
+                                <a asp-controller="Product" asp-action="Edit" asp-route-id="@i.Id" class="btn btn-primary mx-2">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+
+                                <!-- Delete Button with Confirmation -->
+                                <a asp-controller="Product" asp-action="Delete" asp-route-id="@i.Id"
+                                   class="btn btn-danger mx-2"
+                                   onclick="return confirm('Are you sure you want to delete this Product?');">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
