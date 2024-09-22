@@ -17,6 +17,8 @@ namespace Bulky.DataAccess.Data
 
         public DbSet<Company> Companies { get; set; }
 
+        public DbSet<Cart> Cart {  get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //added to avoid error, required if we are using identitydbcontext
