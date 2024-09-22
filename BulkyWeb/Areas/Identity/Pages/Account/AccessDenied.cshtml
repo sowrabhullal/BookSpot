@@ -4,7 +4,57 @@
     ViewData["Title"] = "Access denied";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
-</header>
+<style>
+    .container-error {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center; /* Center the text */
+    }
+
+    .icon {
+        font-size: 50px; /* Adjust size as needed */
+        color: #b12704; /* Example color for the icon */
+        margin-bottom: 20px; /* Space below the icon */
+    }
+
+    h1 {
+        font-size: 72px;
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin: 20px 0;
+    }
+
+    p {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    a {
+        color: #007185; /* Link color */
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<div class="container-error">
+    <div class="icon">
+        <i class="bi bi-exclamation-triangle-fill"></i> <!-- Bootstrap icon -->
+    </div>
+    <h1>403</h1>
+    <h2>Access Denied</h2>
+    <p>You do not have permission to access this page.</p>
+    <p>
+        <a asp-area="Customer" asp-controller="Home" asp-action="Index">Return to Home</a>
+    </p>
+</div>

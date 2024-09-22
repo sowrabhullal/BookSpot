@@ -15,6 +15,8 @@ namespace Bulky.DataAccess.Data
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
+        public DbSet<Company> Companies { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //added to avoid error, required if we are using identitydbcontext
@@ -24,6 +26,10 @@ namespace Bulky.DataAccess.Data
                 new Category { Id = 1, Name="Action", DisplayOrder=1},
                 new Category { Id = 2, Name = "SciFi", DisplayOrder = 2 },
                 new Category { Id = 3, Name = "History", DisplayOrder = 3 }
+            );
+
+            modelBuilder.Entity<Company>().HasData(
+                new Company { Id = 1, Name = "Tektronix", City="Bangalore", PhoneNumber="9731784327", PostalCode="575020", State="Kar", StreetAddress="Marathahalli"}
             );
 
             modelBuilder.Entity<Product>().HasData(
