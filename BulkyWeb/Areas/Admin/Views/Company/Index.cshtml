@@ -16,20 +16,27 @@
 
     <!-- Company Table -->
     <div class="table-responsive mt-4">
-        <table class="table table-bordered table-striped">
+        <table id="tbldata" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Company Name</th>
+                    <th>Address</th>
+                    <th>City</th>
                     <th>State</th>
+                    <th>Postal Code</th>
+                    <th>Phone Number</th>
                     <th>Operations</th>
                 </tr>
             </thead>
-            <tbody>
+            @* <tbody>
                 @foreach (var i in Model)
                 {
                     <tr>
                         <td>@i.Name</td>
+                        <td>@i.StreetAddress</td>
+                        <td>@i.City</td>
                         <td>@i.State</td>
+                        <td>@i.PhoneNumber</td>
                         <td>
                             <div class="btn-group" role="group">
                                 <!-- Edit Button -->
@@ -47,7 +54,10 @@
                         </td>
                     </tr>
                 }
-            </tbody>
+            </tbody> *@
         </table>
     </div>
 </div>
+@section Scripts {
+    <script src="~/js/Company.js"></script>
+}

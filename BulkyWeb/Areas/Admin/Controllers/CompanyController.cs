@@ -50,7 +50,6 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 {
                     unitofwork.company.Add(obj);
                 }
-
                 unitofwork.Save();
                 TempData["sucess"] = "Company created sucesfuly";
                 return RedirectToAction("Index");
@@ -61,12 +60,29 @@ namespace BulkyWeb.Areas.Admin.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var company = unitofwork.company.GetAll();
+
+            return Json(new { data = company });
+        }
+
+        [HttpDelete]
         public IActionResult Delete(int id)
         {
-            unitofwork.company.Remove(unitofwork.company.Get(u => u.Id == id));
-            unitofwork.Save();
-            TempData["sucess"] = "Company deleted sucesfuly";
-            return RedirectToAction("Index");
+            var companytodelete = unitofwork.company.Get(u => u.Id == id);
+
+            if (companytodelete == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+            else
+            {
+                unitofwork.company.Remove(companytodelete);
+                unitofwork.Save();
+                return Json(new { success = true, message = "Company deleted sucessfully" });
+            }
         }
     }
 }

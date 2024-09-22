@@ -13,6 +13,10 @@
             transform: scale(1.02); /* Slightly increase size on hover */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
         }
+
+    #companyField {
+        display: none; /* Initially hidden */
+    }
 </style>
 
 <div class="container mt-5">
@@ -95,12 +99,23 @@
                         </div>
 
                         <div class="row mb-3">
+                            <!-- Role Field -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-control">
+                                    <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-control" id="roleDropdown">
                                         <option disabled selected>- Select Role -</option>
                                     </select>
                                     <label asp-for="Input.Role">Role</label>
+                                </div>
+                            </div>
+
+                            <!-- Company Field (Initially Hidden) -->
+                            <div class="col-md-6" id="companyField">
+                                <div class="form-floating mb-3">
+                                    <select asp-for="Input.CompanyId" asp-items="@Model.Input.CompanyList" class="form-control">
+                                        <option disabled selected>- Select Company -</option>
+                                    </select>
+                                    <label asp-for="Input.CompanyId">Company</label>
                                 </div>
                             </div>
                         </div>
@@ -142,4 +157,16 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.getElementById('roleDropdown').addEventListener('change', function () {
+            var selectedRole = this.value;
+            var companyField = document.getElementById('companyField');
+            if (selectedRole === 'Company') { // Assuming 'Company' is the value for the company role
+                companyField.style.display = 'block'; // Show the company field
+            } else {
+                companyField.style.display = 'none'; // Hide the company field
+            }
+        });
+    </script>
 }
