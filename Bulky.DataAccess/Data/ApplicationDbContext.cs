@@ -21,6 +21,9 @@ namespace Bulky.DataAccess.Data
 
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //added to avoid error, required if we are using identitydbcontext

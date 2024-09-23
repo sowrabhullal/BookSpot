@@ -28,13 +28,14 @@ public class CartController : Controller
         cartVM = new()
         {
             ShoppingCartList = unitofwork.shoppingcart.GetAll(u => u.ApplicationUserId == userId,
-            includeproperties: "Product")
+            includeproperties: "Product"),
+            OrderHeader=new()
         };
 
         foreach (var i in cartVM.ShoppingCartList)
         {
             i.Price = CalculateCost(i);
-            cartVM.OrderTotal += (i.Price * i.Count);
+            cartVM.OrderHeader.OrderTotal += (i.Price * i.Count);
         }
 
         return View(cartVM);
