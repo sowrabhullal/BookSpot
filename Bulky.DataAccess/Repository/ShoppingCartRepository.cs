@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Bulky.DataAccess.Repository
 {
-    public class CartRepository : Repository<CartRepository>, ICartRepository
+    public class ShoppingCartRepository : Repository<ShoppingCart>, IShoppingCartRepository
     {
         private ApplicationDbContext _db;
-        public CartRepository(ApplicationDbContext db) : base(db)
+        public ShoppingCartRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
 
-        public void Update(Cart obj)
+        public void Update(ShoppingCart obj)
         {
             _db.Cart.Update(obj);
         }

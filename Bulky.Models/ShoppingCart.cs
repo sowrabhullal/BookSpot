@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 
 namespace Bulky.Models
 {
-    public class Cart
+    public class ShoppingCart
     {
-        [Key]
         public int Id { get; set; }
 
         [Range(1,1000, ErrorMessage ="Please enter a value between 1 and 1000")]

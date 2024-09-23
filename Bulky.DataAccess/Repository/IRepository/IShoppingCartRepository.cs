@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Bulky.DataAccess.Repository.IRepository
 {
-    public interface ICartRepository:IRepository<CartRepository>
+    public interface IShoppingCartRepository:IRepository<ShoppingCart>
     {
-        void Update(Cart obj);
+        void Update(ShoppingCart obj);
     }
     
 }
