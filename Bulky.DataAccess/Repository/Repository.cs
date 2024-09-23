@@ -24,9 +24,19 @@ namespace Bulky.DataAccess.Repository
             _dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter, string? includeproperties = null)
+        public T Get(Expression<Func<T, bool>> filter, string? includeproperties = null, bool track=false)
         {
-            IQueryable<T> query = _dbSet;
+            //Asnotracting will make sure the db is not updated when we get the item from database
+            IQueryable<T> query;
+
+            if (track == true)
+            {
+                query = _dbSet;
+            }
+            else {
+                query = _dbSet.AsNoTracking();
+            }
+
             if (includeproperties != null)
             {
                 foreach (var property in includeproperties
@@ -42,9 +52,19 @@ namespace Bulky.DataAccess.Repository
         //must handle multiple includes
         //includeproperties is to handle foreign key relationship, ie to get the values of
         //category table as part of the product table
-        public IEnumerable<T> GetAll(string? includeproperties=null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter=null, string? includeproperties=null, bool track=false)
         {
-            IQueryable<T> query = _dbSet;
+            IQueryable<T> query;
+
+            if (track == true)
+            {
+                query = _dbSet;
+            }
+            else
+            {
+                query = _dbSet.AsNoTracking();
+            }
+
             if (includeproperties != null) {
                 foreach (var property in includeproperties
                     .Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries))
@@ -52,7 +72,10 @@ namespace Bulky.DataAccess.Repository
                     query=query.Include(property);
                 }
             }
-            
+            if (filter != null) {
+                query = query.Where(filter);
+            }
+
             return query.ToList();
         }
 

@@ -1,0 +1,105 @@
+﻿@model CartVM
+
+<style>
+    /* Prevent button focus outlines */
+    button:focus, a:focus {
+        outline: none; /* Remove default focus outline */
+    }
+
+    /* Ensure consistent margins */
+    .btn {
+        margin: 0; /* Consistent margin */
+    }
+
+    /* Set a fixed height for the card to prevent shifting */
+    .card {
+        height: auto; /* Adjust as needed for your design */
+        transition: background-color 0.3s; /* Smooth transition for background */
+
+    }
+
+
+    /* Prevent movement of the card on hover */
+    .row.border-bottom:hover {
+        background-color: #e9ecef; /* Change background without affecting layout */
+    }
+
+    /* Optional: Set fixed height for product image */
+    .product-image {
+        width: 80%;
+        max-width: 150px;
+        height: auto; /* Keep aspect ratio */
+    }
+</style>
+
+<form method="post">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left side: Shopping Cart Items -->
+            <div class="col-lg-8">
+                <h4 class="fw-bold text-dark mb-4">Shopping Cart</h4>
+                <div class="card border-0 shadow-sm p-4">
+                    @if (!Model.ShoppingCartList.Any())
+                    {
+                        <div class="alert alert-info">Your shopping cart is empty.</div>
+                    }
+                    else
+                    {
+                        foreach (var i in Model.ShoppingCartList)
+                        {
+                            <div class="row border-bottom py-3 align-items-center">
+                                <!-- Product Image -->
+                                <div class="col-3 col-lg-2 text-center">
+                                    <img src="@i.Product.ImageUrl" class="rounded product-image" alt="@i.Product.Title" />
+                                </div>
+
+                                <!-- Product Details -->
+                                <div class="col-9 col-lg-6">
+                                    <h6 class="text-uppercase text-dark mb-2"><strong>@i.Product.Title</strong></h6>
+                                    <p class="mb-0 text-muted"><small>@Html.Raw(@i.Product.Description)</small></p>
+                                    <a asp-action="Remove" asp-route-id="@i.Id" class="text-danger mt-1 d-inline-block">
+                                        <i class="bi bi-trash-fill"></i> Remove
+                                    </a>
+                                </div>
+
+                                <!-- Quantity and Price -->
+                                <div class="col-12 col-lg-4 row align-items-center">
+                                    <div class="col-4 text-center">
+                                        <h6 class="fw-semibold">@i.Price.ToString("c")</h6>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <div class="btn-group" role="group">
+                                            <a asp-action="Minus" asp-route-id="@i.Id" class="btn btn-outline-secondary bg-gradient py-2">
+                                                <i class="bi bi-dash-square"></i>
+                                            </a>
+                                            <span class="px-2 my-auto">@i.Count</span>
+                                            <a asp-action="Plus" asp-route-id="@i.Id" class="btn btn-outline-secondary bg-gradient py-2">
+                                                <i class="bi bi-plus-square"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="mt-4">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary text-uppercase">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right side: Order Summary -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm p-4">
+                    <ul class="list-group mb-3">
+                        <li class="d-flex justify-content-between align-items-center">
+                            <span class="fw-semibold text-uppercase">Total (INR)</span>
+                            <span class="fw-bold h5">@Model.OrderTotal.ToString("c")</span>
+                        </li>
+                    </ul>
+                    <a asp-action="Summary" class="btn btn-success border-0 w-100 py-2">Proceed to Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

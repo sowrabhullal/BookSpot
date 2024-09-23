@@ -1,0 +1,142 @@
+﻿<form method="post">
+    <br />
+    <div class="container">
+        <div class="card shadow border-0">
+
+            <div class="card-header bg-light border-bottom">
+                <div class="row px-4">
+                    <div class="col-6">
+                        <h5 class="pt-2">Shopping Cart</h5>
+                    </div>
+                    <div class="col-6 text-end">
+                        <a class="btn btn-outline-danger btn-sm">Back to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-lg-7 pb-4">
+                            <h4 class="text-info">Shipping Details:</h4>
+                            <div class="row my-1">
+                                <div class="col-3">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-9">
+                                    <input class="form-control" placeholder="Enter your name" />
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-3">
+                                    <label>Phone</label>
+                                </div>
+                                <div class="col-9">
+                                    <input class="form-control" placeholder="Enter your phone number" />
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-3">
+                                    <label>Street Address</label>
+                                </div>
+                                <div class="col-9">
+                                    <input class="form-control" placeholder="Enter your address" />
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-3">
+                                    <label>City</label>
+                                </div>
+                                <div class="col-9">
+                                    <input class="form-control" placeholder="Enter your city" />
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-3">
+                                    <label>State</label>
+                                </div>
+                                <div class="col-9">
+                                    <input class="form-control" placeholder="Enter your state" />
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-3">
+                                    <label>Postal Code</label>
+                                </div>
+                                <div class="col-9">
+                                    <input class="form-control" placeholder="Enter your postal code" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-5">
+                            <h4 class="text-info">Order Summary:</h4>
+                            <ul class="list-group mb-3">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="my-0">Product Title</h6>
+                                        <small class="text-muted">Quantity: 1</small>
+                                    </div>
+                                    <span class="text-muted">$10.00</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="my-0">Another Product</h6>
+                                        <small class="text-muted">Quantity: 2</small>
+                                    </div>
+                                    <span class="text-muted">$20.00</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between bg-light">
+                                    <small class="text-info">Total (USD)</small>
+                                    <strong class="text-info">$30.00</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer bg-light border-top">
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <p style="color: maroon; font-size: 14px;">
+                            Estimate Arrival Date: <strong>[Your Estimated Date]</strong>
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <button type="submit" value="Place Order" class="btn btn-success form-control">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<style>
+    .card {
+        border-radius: 8px; /* Rounded corners */
+    }
+
+    .card-header {
+        background-color: #f7f7f7; /* Light gray */
+        border-bottom: 1px solid #ddd; /* Subtle border */
+    }
+
+    .list-group-item {
+        border: none; /* Remove borders */
+        padding: 10px 15px; /* Consistent padding */
+    }
+
+    .text-info {
+        color: #007185; /* Amazon's blue color */
+    }
+
+    .btn-outline-danger {
+        border-color: #c82333; /* Custom danger color */
+    }
+
+        .btn-outline-danger:hover {
+            background-color: #c82333; /* Darker on hover */
+            color: white; /* White text on hover */
+        }
+</style>
