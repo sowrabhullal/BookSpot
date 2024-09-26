@@ -1,4 +1,6 @@
-﻿<form method="post">
+﻿@model CartVM
+
+<form method="post">
     <br />
     <div class="container">
         <div class="card shadow border-0">
@@ -9,7 +11,7 @@
                         <h5 class="pt-2">Shopping Cart</h5>
                     </div>
                     <div class="col-6 text-end">
-                        <a class="btn btn-outline-danger btn-sm">Back to Cart</a>
+                        <a asp-action="Index" class="btn btn-outline-danger btn-sm">Back to Cart</a>
                     </div>
                 </div>
             </div>
@@ -18,13 +20,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-lg-7 pb-4">
-                            <h4 class="text-info">Shipping Details:</h4>
+                            <h4 class="text-info">Order Summary:</h4>
                             <div class="row my-1">
                                 <div class="col-3">
-                                    <label>Name</label>
+                                    <label >Name</label>
                                 </div>
                                 <div class="col-9">
-                                    <input class="form-control" placeholder="Enter your name" />
+                                    <input asp-for="OrderHeader.Name" class="form-control" placeholder="Enter your name" />
+                                    <span asp-validation-for="OrderHeader.Name" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -32,7 +35,8 @@
                                     <label>Phone</label>
                                 </div>
                                 <div class="col-9">
-                                    <input class="form-control" placeholder="Enter your phone number" />
+                                    <input asp-for="OrderHeader.PhoneNumber" class="form-control" placeholder="Enter your phone number" />
+                                    <span asp-validation-for="OrderHeader.PhoneNumber" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -40,7 +44,8 @@
                                     <label>Street Address</label>
                                 </div>
                                 <div class="col-9">
-                                    <input class="form-control" placeholder="Enter your address" />
+                                    <input asp-for="OrderHeader.StreetAddress" class="form-control" placeholder="Enter your address" />
+                                    <span asp-validation-for="OrderHeader.StreetAddress" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -48,7 +53,8 @@
                                     <label>City</label>
                                 </div>
                                 <div class="col-9">
-                                    <input class="form-control" placeholder="Enter your city" />
+                                    <input asp-for="OrderHeader.City" class="form-control" placeholder="Enter your city" />
+                                    <span asp-validation-for="OrderHeader.City" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -56,7 +62,8 @@
                                     <label>State</label>
                                 </div>
                                 <div class="col-9">
-                                    <input class="form-control" placeholder="Enter your state" />
+                                    <input asp-for="OrderHeader.State" class="form-control" placeholder="Enter your state" />
+                                    <span asp-validation-for="OrderHeader.State" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -64,7 +71,8 @@
                                     <label>Postal Code</label>
                                 </div>
                                 <div class="col-9">
-                                    <input class="form-control" placeholder="Enter your postal code" />
+                                    <input asp-for="OrderHeader.PostalCode" class="form-control" placeholder="Enter your postal code" />
+                                    <span asp-validation-for="OrderHeader.PostalCode" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -72,23 +80,21 @@
                         <div class="col-12 col-lg-5">
                             <h4 class="text-info">Order Summary:</h4>
                             <ul class="list-group mb-3">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h6 class="my-0">Product Title</h6>
-                                        <small class="text-muted">Quantity: 1</small>
-                                    </div>
-                                    <span class="text-muted">$10.00</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h6 class="my-0">Another Product</h6>
-                                        <small class="text-muted">Quantity: 2</small>
-                                    </div>
-                                    <span class="text-muted">$20.00</span>
-                                </li>
+                                @foreach (var i in Model.ShoppingCartList)
+                                {
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="my-0">@i.Product.Title</h6>
+                                            <small class="text-muted">Quantity: @i.Count</small>
+                                        </div>
+                                        <span class="text-muted">@((i.Product.Price * i.Count).ToString("c"))</span>
+                                    </li>
+                                
+                                }
+                                
                                 <li class="list-group-item d-flex justify-content-between bg-light">
-                                    <small class="text-info">Total (USD)</small>
-                                    <strong class="text-info">$30.00</strong>
+                                    <small class="text-info">Total (INR)</small>
+                                    <strong class="text-info">@Model.OrderHeader.OrderTotal.ToString("c")</strong>
                                 </li>
                             </ul>
                         </div>
@@ -100,7 +106,7 @@
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <p style="color: maroon; font-size: 14px;">
-                            Estimate Arrival Date: <strong>[Your Estimated Date]</strong>
+                            Estimate Arrival Date: <strong id="estimatedDate"></strong>
                         </p>
                     </div>
                     <div class="col-12 col-md-4">
@@ -111,7 +117,11 @@
         </div>
     </div>
 </form>
-
+<script>
+    // Get today's date, add 7 days, and format it in one line
+    document.getElementById('estimatedDate').textContent = new Date(new Date().setDate(new Date().getDate() + 7))
+        .toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+</script>
 <style>
     .card {
         border-radius: 8px; /* Rounded corners */

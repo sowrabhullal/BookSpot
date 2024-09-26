@@ -6,5 +6,8 @@ namespace Bulky.DataAccess.Repository.IRepository
     {
         void Update(OrderHeader obj);
 
+        void UpdateStatus(int id, string OrderStatus, string? PaymentStatus);
+        void UpdateSessionId(int id,string SessionId, string paymentIntentId);
+
     }
 }

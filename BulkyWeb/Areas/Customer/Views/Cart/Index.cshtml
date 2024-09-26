@@ -88,18 +88,21 @@
                 </div>
             </div>
 
-            <!-- Right side: Order Summary -->
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-sm p-4">
-                    <ul class="list-group mb-3">
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span class="fw-semibold text-uppercase">Total (INR)</span>
-                            <span class="fw-bold h5">@Model.OrderHeader.OrderTotal.ToString("c")</span>
-                        </li>
-                    </ul>
-                    <a asp-action="Summary" class="btn btn-success border-0 w-100 py-2">Proceed to Checkout</a>
+            @if (Model.ShoppingCartList.Any())
+            {
+                <!-- Right side: Order Summary -->
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm p-4">
+                        <ul class="list-group mb-3">
+                            <li class="d-flex justify-content-between align-items-center">
+                                <span class="fw-semibold text-uppercase">Total (INR)</span>
+                                <span class="fw-bold h5">@Model.OrderHeader.OrderTotal.ToString("c")</span>
+                            </li>
+                        </ul>
+                        <a asp-action="Summary" class="btn btn-success border-0 w-100 py-2">Proceed to Checkout</a>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </form>

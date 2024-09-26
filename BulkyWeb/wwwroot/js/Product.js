@@ -44,7 +44,7 @@ function loadDataTable() {
     });
 }
 
-function deleteproduct(url){
+function deleteproduct(url) {
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",

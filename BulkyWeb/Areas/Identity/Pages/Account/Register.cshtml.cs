@@ -37,7 +37,7 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork unitofwork;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -55,7 +55,7 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _unitOfWork = u;
+            unitofwork = u;
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                     Text=i,
                     Value=i
                 }),
-                CompanyList = _unitOfWork.company.GetAll().Select(i=>new SelectListItem { 
+                CompanyList = unitofwork.company.GetAll().Select(i=>new SelectListItem { 
                     Text=i.Name,
                     Value=i.Id.ToString()
                 })

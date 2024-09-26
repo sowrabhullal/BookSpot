@@ -2,6 +2,7 @@
 using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models;
 using Bulky.Models.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -18,6 +19,8 @@ namespace BulkyWeb.Areas.Admin.Controllers
             unitofwork = u;
             webHostEnvironment = w;
         }
+
+        [Authorize]
         public IActionResult Index()
         {
             //unitofwork has category object 
