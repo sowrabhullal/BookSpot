@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="8.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
@@ -18,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bulky.Models\BookSpot.Models.csproj" />
-    <ProjectReference Include="..\Bulky.Utility\BookSpot.Utility.csproj" />
+    <ProjectReference Include="..\BookSpot.Models\BookSpot.Models.csproj" />
+    <ProjectReference Include="..\BookSpot.Utility\BookSpot.Utility.csproj" />
   </ItemGroup>
 
 </Project>

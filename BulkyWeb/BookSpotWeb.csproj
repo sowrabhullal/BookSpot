@@ -41,11 +41,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bulky.DataAccess\BookSpot.DataAccess.csproj" />
+    <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\product\" />
+    <ProjectReference Include="..\BookSpot.DataAccess\BookSpot.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
