@@ -1,8 +1,8 @@
-using Bulky.DataAccess.Repository;
 using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models;
 using Bulky.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -23,6 +23,21 @@ namespace BulkyWeb.Areas.Customer.Controllers
         public IActionResult Index()
         {
             var product = unitofwork.product.GetAll(includeproperties: "Category");
+
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            HttpContext.Session.SetInt32(SD.SessionCart, 0);
+
+            if (claim != null)
+            {
+                ShoppingCart cartfromdb = unitofwork.shoppingcart.Get(u => u.ApplicationUserId == claim.Value);
+
+                if (cartfromdb != null)
+                {
+                    HttpContext.Session.SetInt32(SD.SessionCart,
+                    unitofwork.shoppingcart.GetAll(u => u.ApplicationUserId == cartfromdb.ApplicationUserId).Count());
+                }
+            }
 
             return View(product);
         }
@@ -55,11 +70,14 @@ namespace BulkyWeb.Areas.Customer.Controllers
             {
                 cartfromdb.Count += shoppingCart.Count;
                 unitofwork.shoppingcart.Update(cartfromdb);
+                unitofwork.Save();
             }
             else {
                 unitofwork.shoppingcart.Add(shoppingCart);
+                unitofwork.Save();
+                HttpContext.Session.SetInt32(SD.SessionCart, 
+                    unitofwork.shoppingcart.GetAll(u => u.ApplicationUserId == shoppingCart.ApplicationUserId).Count());
             }
-            unitofwork.Save();
 
             return RedirectToAction(nameof(Index));
         }

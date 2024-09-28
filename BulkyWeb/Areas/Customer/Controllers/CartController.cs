@@ -7,6 +7,7 @@ using System.Security.Claims;
 using Bulky.Utility;
 using Stripe.Checkout;
 using Bulky.DataAccess.Repository;
+using Microsoft.AspNetCore.Http;
 
 [Area("Customer")]
 public class CartController : Controller
@@ -61,11 +62,13 @@ public class CartController : Controller
 
     public IActionResult Minus(int id)
     {
-        var cartItem = unitofwork.shoppingcart.Get(u => u.Id == id);
+        var cartItem = unitofwork.shoppingcart.Get(u => u.Id == id, track: true);
         if (cartItem != null)
         {
             if (cartItem.Count <= 1)
             {
+                HttpContext.Session.SetInt32(SD.SessionCart, unitofwork.shoppingcart.GetAll(
+                    u => u.ApplicationUserId == cartItem.ApplicationUserId).Count() - 1);
                 unitofwork.shoppingcart.Remove(cartItem);
             }
             else
@@ -80,10 +83,12 @@ public class CartController : Controller
 
     public IActionResult Remove(int id)
     {
-        var cartItem = unitofwork.shoppingcart.Get(u => u.Id == id);
+        var cartItem = unitofwork.shoppingcart.Get(u => u.Id == id, track:true);
         if (cartItem != null)
         {
             unitofwork.shoppingcart.Remove(cartItem);
+            HttpContext.Session.SetInt32(SD.SessionCart, unitofwork.shoppingcart.GetAll(
+                u => u.ApplicationUserId == cartItem.ApplicationUserId).Count()-1);
             unitofwork.Save();
         }
         return RedirectToAction("Index");
@@ -229,6 +234,7 @@ public class CartController : Controller
                 unitofwork.orderheader.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
                 unitofwork.Save();
             }
+            HttpContext.Session.Clear();
         }
 
         //after order confirmation remove the items from the cart

@@ -34,6 +34,21 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
 
+//configuring facebook login
+builder.Services.AddAuthentication().AddFacebook(option =>
+{
+    option.AppId = builder.Configuration["Facebook:AppID"];
+    option.AppSecret = builder.Configuration["Facebook:AppSecret"];
+});
+
+//Configuring sessions
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options => {
+    options.IdleTimeout = TimeSpan.FromMinutes(100);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
@@ -52,6 +67,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 app.UseRouting();
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
