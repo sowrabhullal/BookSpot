@@ -5,10 +5,8 @@ using Bulky.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Bulky.Utility;
-using Microsoft.Extensions.Options;
 using Stripe;
 using Bulky.DataAccess.DBInitializer;
-using Microsoft.EntityFrameworkCore.Internal;
 using BulkyBook.DataAccess.DbInitializer;
 
 
@@ -80,9 +78,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
-
 app.Run();
-
 
 void SeedDatabase()
 {
