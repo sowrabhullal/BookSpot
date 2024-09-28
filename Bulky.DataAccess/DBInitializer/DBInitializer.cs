@@ -1,6 +1,7 @@
 ﻿using Bulky.DataAccess.Data;
 using Bulky.Models;
 using Bulky.Utility;
+using BulkyBook.DataAccess.DbInitializer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -62,7 +63,6 @@ namespace Bulky.DataAccess.DBInitializer
                 ApplicationUser user = db.ApplicationUser.FirstOrDefault(u => u.Email == "admin@gmail.com");
                 userManager.AddToRoleAsync(user, SD.Role_Admin).GetAwaiter().GetResult();
             }
-
 
             return;
         }

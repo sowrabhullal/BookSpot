@@ -8,6 +8,8 @@ using Bulky.Utility;
 using Microsoft.Extensions.Options;
 using Stripe;
 using Bulky.DataAccess.DBInitializer;
+using Microsoft.EntityFrameworkCore.Internal;
+using BulkyBook.DataAccess.DbInitializer;
 
 
 var builder = WebApplication.CreateBuilder(args);

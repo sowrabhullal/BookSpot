@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bulky.DataAccess.DBInitializer
+namespace BulkyBook.DataAccess.DbInitializer
 {
-    internal class IDBInitializer
+    public interface IDBInitializer
     {
+        void Initialize();
     }
 }
