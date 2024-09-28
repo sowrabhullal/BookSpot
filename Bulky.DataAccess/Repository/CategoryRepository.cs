@@ -1,8 +1,8 @@
-﻿using Bulky.DataAccess.Data;
-using Bulky.DataAccess.Repository.IRepository;
-using Bulky.Models;
+﻿using BookSpot.DataAccess.Data;
+using BookSpot.DataAccess.Repository.IRepository;
+using BookSpot.Models;
 
-namespace Bulky.DataAccess.Repository
+namespace BookSpot.DataAccess.Repository
 {
     public class CategoryRepository : Repository<Category> ,ICategoryRepository
     {

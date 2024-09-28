@@ -1,13 +1,13 @@
-using Bulky.DataAccess.Data;
-using Bulky.DataAccess.Repository;
+using BookSpot.DataAccess.Data;
+using BookSpot.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
-using Bulky.DataAccess.Repository.IRepository;
+using BookSpot.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Bulky.Utility;
+using BookSpot.Utility;
 using Stripe;
-using Bulky.DataAccess.DBInitializer;
-using BulkyBook.DataAccess.DbInitializer;
+using BookSpot.DataAccess.DBInitializer;
+using BookSpot.DataAccess.DbInitializer;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -64,7 +64,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 //Middleware
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];

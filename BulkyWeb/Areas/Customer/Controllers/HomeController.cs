@@ -1,13 +1,13 @@
-using Bulky.DataAccess.Repository.IRepository;
-using Bulky.Models;
-using Bulky.Utility;
+using BookSpot.DataAccess.Repository.IRepository;
+using BookSpot.Models;
+using BookSpot.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
 
-namespace BulkyWeb.Areas.Customer.Controllers
+namespace BookSpotWeb.Areas.Customer.Controllers
 {
     [Area("Customer")]
     public class HomeController : Controller

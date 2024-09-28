@@ -17,10 +17,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using Bulky.Models;
-using Bulky.Utility;
+using BookSpot.Models;
+using BookSpot.Utility;
 
-namespace BulkyWeb.Areas.Identity.Pages.Account
+namespace BookSpotWeb.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ExternalLoginModel : PageModel

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bulky.Models.ViewModel
+namespace BookSpot.Models.ViewModel
 {
     public class ProductVM
     {

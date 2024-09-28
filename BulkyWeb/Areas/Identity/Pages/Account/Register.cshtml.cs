@@ -10,10 +10,10 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
-using Bulky.DataAccess.Repository;
-using Bulky.DataAccess.Repository.IRepository;
-using Bulky.Models;
-using Bulky.Utility;
+using BookSpot.DataAccess.Repository;
+using BookSpot.DataAccess.Repository.IRepository;
+using BookSpot.Models;
+using BookSpot.Utility;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -26,7 +26,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.General;
 
-namespace BulkyWeb.Areas.Identity.Pages.Account
+namespace BookSpotWeb.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {

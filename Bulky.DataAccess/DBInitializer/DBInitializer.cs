@@ -1,7 +1,7 @@
-﻿using Bulky.DataAccess.Data;
-using Bulky.Models;
-using Bulky.Utility;
-using BulkyBook.DataAccess.DbInitializer;
+﻿using BookSpot.DataAccess.Data;
+using BookSpot.Models;
+using BookSpot.Utility;
+using BookSpot.DataAccess.DbInitializer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bulky.DataAccess.DBInitializer
+namespace BookSpot.DataAccess.DBInitializer
 {
     public class DBInitializer : IDBInitializer
     {

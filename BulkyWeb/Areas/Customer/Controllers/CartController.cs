@@ -1,12 +1,12 @@
-﻿using Bulky.DataAccess.Repository.IRepository;
-using Bulky.Models.ViewModel;
-using Bulky.Models;
+﻿using BookSpot.DataAccess.Repository.IRepository;
+using BookSpot.Models.ViewModel;
+using BookSpot.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using Bulky.Utility;
+using BookSpot.Utility;
 using Stripe.Checkout;
-using Bulky.DataAccess.Repository;
+using BookSpot.DataAccess.Repository;
 using Microsoft.AspNetCore.Http;
 
 [Area("Customer")]

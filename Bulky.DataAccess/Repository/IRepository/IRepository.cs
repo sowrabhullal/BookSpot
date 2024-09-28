@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Bulky.DataAccess.Repository.IRepository
+namespace BookSpot.DataAccess.Repository.IRepository
 {
     //<T> can be any class, Repo pattern is mainly used when we implement CRUD operations.
     public interface IRepository<T> where T : class

@@ -1,8 +1,8 @@
-﻿using Bulky.DataAccess.Repository;
-using Bulky.DataAccess.Repository.IRepository;
-using Bulky.Models;
-using Bulky.Models.ViewModel;
-using Bulky.Utility;
+﻿using BookSpot.DataAccess.Repository;
+using BookSpot.DataAccess.Repository.IRepository;
+using BookSpot.Models;
+using BookSpot.Models.ViewModel;
+using BookSpot.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
@@ -10,7 +10,7 @@ using Stripe;
 using System.Diagnostics;
 using System.Security.Claims;
 
-namespace BulkyWeb.Areas.Admin.Controllers
+namespace BookSpotWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Bulky.DataAccess.Migrations
+namespace BookSpot.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class addingmigrationforidentity : Migration

@@ -1,6 +1,6 @@
-﻿using Bulky.Models;
+﻿using BookSpot.Models;
 
-namespace Bulky.DataAccess.Repository.IRepository
+namespace BookSpot.DataAccess.Repository.IRepository
 {
     public interface IOrderHeaderRepository : IRepository<OrderHeader>
     {

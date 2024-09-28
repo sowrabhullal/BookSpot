@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bulky.Models
+namespace BookSpot.Models
 {
     public class ShoppingCart
     {
